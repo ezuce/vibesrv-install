@@ -1,0 +1,59 @@
+version: "3.7"
+
+services:
+  rnode:
+    image: ${DKH_REPO}/rnode:${TAG}
+    container_name: ${CONTAINER_NAME_PREFIX}rnode
+    ports:
+      - 36015:36015/udp
+      - 36015:36015/tcp
+      - 46015:46015/udp
+      - 46015:46015/tcp
+      - 46014:46014/udp
+      - 46014:46014/tcp
+      - 36016:36016/udp
+      - 36016:36016/tcp
+      - 36025:36025/udp
+      - 36025:36025/tcp
+      - 5353:5353/tcp
+      - 5354:5354/tcp
+      - 3232:3232/tcp
+      - 3233:3233/tcp
+      - 3234:3234/tcp
+      - 3235:3235/tcp
+      - 3236:3236/tcp
+      - 4238:4238/tcp
+      - 3248:3248/tcp
+      - 3247:3247/tcp
+    ulimits:
+      nproc: 50000
+
+#TCP IN any 9090:9095
+#UDP IN any 20000:57000
+    networks:
+      1_vibesrv:
+        aliases:
+          - rnode
+    # environment:
+    #   - NETWORK=reach3
+    #   - NODE=freeswitch@freeswitch.reach3${NETWORK_NAME_SUFFIX}
+    #   - REACH_NODE=reach@reach.reach3${NETWORK_NAME_SUFFIX}
+    #   - REACH_HOST=http://reach.reach3${NETWORK_NAME_SUFFIX}:8937
+#    logging:
+#      driver: none
+
+networks:
+  1_vibesrv:
+    driver: bridge
+    name: vibesrv${NETWORK_NAME_SUFFIX}
+#   0_sip_ext:
+#     driver: bridge
+#     name: ext${NETWORK_NAME_SUFFIX}
+
+# volumes:
+#   db-timescale:
+#     name: db-timescale.reach3${NETWORK_NAME_SUFFIX}
+#   db-reach:
+#     name: db-reach.reach3${NETWORK_NAME_SUFFIX}
+#   db-rr:
+#     name: db-rr.reach3${NETWORK_NAME_SUFFIX}
