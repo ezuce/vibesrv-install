@@ -33,20 +33,20 @@ fi
 curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
-# create user vibe, if it does not exist
-id -u vibe >/dev/null 2>&1 || useradd -m -g docker vibe
+# create user vibesrv, if it does not exist
+id -u vibesrv >/dev/null 2>&1 || useradd -m -g docker vibesrv
 
 # get installation scripts
-cd /home/vibe
-#mkdir -p reach-install
-#curl https://raw.githubusercontent.com/ezuce/reach-install/master/reach > reach-install/reach
-#curl https://raw.githubusercontent.com/ezuce/reach-install/master/docker-compose.yml > reach-install/docker-compose.yml
-#chmod +x reach-install/reach
-chown vibe -R /home/vibe
+cd /home/vibesrv
+mkdir -p vibesrv-install
+curl https://raw.githubusercontent.com/ezuce/vibesrv-install/master/vibesrv> vibesrv-install/vibesrv
+curl https://raw.githubusercontent.com/ezuce/vibesrv-install/master/docker-compose.yml > vibesrv-install/docker-compose.yml
+chmod +x reach-install/vibesrv
+chown vibesrv -R /home/vibesrv
 
 # user ezuce can quietly alter iptables to open port range for RTP media
-echo "vibe ALL=(root) NOPASSWD: /sbin/iptables, /sbin/iptables-save" > /etc/sudoers.d/vibe
+echo "vibesrv ALL=(root) NOPASSWD: /sbin/iptables, /sbin/iptables-save" > /etc/sudoers.d/vibesrv
 
 cat <<-EOF
-	${FG_BOLD}To continue, login as user ${FG_GREEN_BOLD}vibesrv${DEFAULT}${FG_BOLD} [ su - vibe ] ...${DEFAULT}
+	${FG_BOLD}To continue, login as user ${FG_GREEN_BOLD}vibesrv${DEFAULT}${FG_BOLD} [ su - vibesrv ] ...${DEFAULT}
 EOF
