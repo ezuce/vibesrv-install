@@ -451,9 +451,9 @@ vibe_install()
 
 	# RNODE_DOCKER_INTERFACE=$(ip route get ${RNODE_IP} | grep -oP '(?<=dev )[^ ]*')
 
-	open_docker_port_range 9090 9095 tcp rnode
+	# open_docker_port_range 9090 9095 tcp rnode
 	# Connections from any remote H.323/SIP clients
-	open_docker_port_range 20000 57000 udp rnode
+	# open_docker_port_range 20000 57000 udp rnode
 
 	# # nat table, DOCKER chain
 	# sudo iptables -t nat -A DOCKER ! -i ${FREESWITCH_DOCKER_INTERFACE} -p udp -m udp --dport 10000:12000 -j DNAT --to-destination ${FREESWITCH_IP}
